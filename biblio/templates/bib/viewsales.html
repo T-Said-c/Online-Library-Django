@@ -1,0 +1,48 @@
+{% extends 'bib/home.html' %}
+{% block content %}
+{% load static %}<link rel="stylesheet" , href="{% static 'css/home.css' %}">
+
+<script>
+    function select(rowsel){
+        var row =document.getElementById(rowsel);
+        var ltid = document.getElementById("cheezy").value;
+        if(ltid != "dud"){
+             var lastrow =document.getElementById(ltid);
+             lastrow.style.background = "white";
+            }
+        document.getElementById("cheezy").value = row.id;
+        if(row.style.background == "" || row.style.background =="white") {
+            row.style.background = "grey";
+        }
+        else {
+            row.style.background = "white";
+        } 
+    }
+</script>
+
+<div style="margin-left: 40px"><br/>
+    <form method='POST'><center class="formtext">List of Sales</center><br/>
+        <center><table class="table2" border="2" id="tab">
+            <tr>
+              <th>Book</th>
+              <th>Member</th>
+              <th>Total</th>
+              <th>Date</th>
+              <th>Quantity</th>
+              </tr>
+              {% for sal in sales %}<tr class="clickable "
+              onclick="select(this.id)" id="{{sal.id}}">
+                <td>{{sal.liv_id}}</td>
+                <td>{{sal.ad_id}}</td>
+                <td>{{sal.montant}}</td>
+                <td>{{sal.date}}</td>
+                <td>{{sal.qt}}</td>
+            </tr>
+              
+          {% endfor %}            
+          </table></center>
+          <br/><br/><br/><br/><br/><br/><input type="text" id="cheezy" name="cheezy" value="dud" hidden/>
+          <div align="center"><button type="submit" class="btn btn-primary" style="width: 150px;">Refund</button> </div>
+      </div>
+    </form></div>
+{% endblock %}

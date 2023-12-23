@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      crossorigin="anonymous"
+    />
+
+  </head>
+
+  <style>
+    /* unvisited link */
+    a:link { text-decoration: underline overline #3F48CC;
+      color: #9fa4e5;
+    }
+    
+    /* visited link */
+    a:visited {text-decoration: underline overline #3F48CC;
+      color: #9fa4e5;
+    }
+    
+    /* mouse over link */
+    a:hover {text-decoration: underline overline #3F48CC;
+      color: #cfd1f2 ;
+    }
+    
+    /* selected link */
+    a:active {text-decoration: underline overline #3F48CC;
+      color: blue;
+    }
+
+    html { overflow-y: hidden; }
+    </style>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #3F48CC">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbar"
+      >
+      <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar">
+        <a class="navbar-brand mx-auto position-absolute" href={% url 'clthome' clt_id=client.id %} >Biblio</a>   
+        <div class="navbar-nav mx-auto text-md-center text-left">
+            <a class="nav-item nav-link " id="shop" href={% url 'shop' clt_id=client.id %} >Buy a book</a>
+
+        </div>
+        <div class="nav navbar-nav flex-row justify-content-md-center justify-content-start flex-nowrap">
+          <a class="nav-item nav-link" id="cart" href={% url 'cart' clt_id=client.id %}  >Cart</a>
+          <a class="nav-item nav-link" id="">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+          <a class="nav-item nav-link" id="logout" href={% url 'logout' %}>Logout</a>
+        </div>
+   </div>
+    </nav>
+    <div class="container-fluid h-100">
+        <div class="row h-100">
+            <div class="col-1" id="green" style="background-color: #3F48CC" >
+                <nav></nav><br/><br/>
+                <!-- Navigation links in sidebar-->
+                
+                <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                <br/>
+                <a href={% url 'location' clt_id=client.id  %}>Location</a>
+                <br/>
+                <br/>
+                <a href={% url 'FAQ' clt_id=client.id  %}>FAQ</a>
+                <br/>
+                <br/>
+                <a href={% url 'contact_us' clt_id=client.id %}>Contact Us</a>
+                <br/>
+                <br/><br/><br/>
+            </div>
+
+        </body>
+    <script
+    src="/docs/4.4/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm"
+    crossorigin="anonymous"
+  ></script>
+
+ &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp{% block content %}
+{% load static %}<link rel="stylesheet" , href="{% static 'css/home.css' %}">
+
+<script>
+
+  function fill(){
+      location.reload()
+  }
+
+  function togglepass() {
+    var x = document.getElementById("password");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }
+   
+  function changeit(){
+      document.getElementById("nom").removeAttribute('readonly');
+      document.getElementById("prenom").removeAttribute('readonly');
+      document.getElementById("mail").removeAttribute('readonly');
+      document.getElementById("password").removeAttribute('readonly');
+      document.getElementById("confirm").removeAttribute('hidden');
+      document.getElementById("cancel").removeAttribute('hidden');
+      document.getElementById("change").hidden=true
+  }
+      
+  
+  
+</script>
+
+<div style="margin-left: -500px">   
+  <br/><br/> <h2 class="welcome">Hello ! <br/> {{client.nom}} {{client.prenom}} !</h2>
+  <br/>
+  <div class="text">
+      Welcome to Biblio! The online platform where you can purchase <br/> the books you want and fulfill your reading desires! 
+  </div> <br/>  
+  <br/><br/>
+  <h2 class="welcome" >Your account Info:</h2><br/>
+  <form method="POST">
+  <table>
+      <tr><td>Family Name :&nbsp&nbsp&nbsp&nbsp</td><td> 
+          <input
+          type="text"
+          value={{client.nom}}
+          class="form-control"
+          id="nom"
+          name="nom"
+          style="width: 270px;"
+          readonly
+        /></td><td><td/> <td><button type="submit" id="confirm" class="btn btn-primary" style="width: 130px;" hidden>Confirm</button> </td></tr>
+      <tr><td>Name :&nbsp&nbsp&nbsp&nbsp</td><td> 
+          <input
+          type="text"
+          value={{client.prenom}}
+          class="form-control"
+          id="prenom"
+          name="prenom"
+          style="width: 270px;"
+          readonly
+        /></td><tr><td>Email :&nbsp&nbsp&nbsp&nbsp</td><td> 
+          <input
+          type="text"
+          value={{client.email}}
+          class="form-control"
+          id="mail"
+          name="mail"
+          style="width: 270px;"
+          readonly
+        /></td><td><td/> <td><button type="button" id="change" class="btn btn-primary" style="width: 130px;" onclick="changeit()">Change</button> </td></tr>
+      <tr><td>Password :&nbsp&nbsp&nbsp&nbsp</td><td> 
+          <input
+        type="password"
+        class="form-control"
+        value={{client.password}}
+        id="password"
+        name="password"
+        style="width: 270px;"
+        readonly
+      /></td><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<td/> 
+            <td> <button type="button" id="cancel" class="btn btn-primary" style="width: 130px; "onclick="fill()" hidden>Cancel</button></td></tr>
+      </tr><tr><td><br/></td></tr>
+      <tr><td>&nbsp&nbsp&nbsp<input type="checkbox" id="passshow" name="pass" value="showpass" onclick="togglepass()"><label for="passshow" >&nbsp Show password</label></td><tr/>        
+      
+      <tr><td><br/></td></tr>
+      
+      <tr><td><td/>
+          
+         
+          
+  </form>
+  <br/>
+</div>
+
+
+{% endblock %}
+
+

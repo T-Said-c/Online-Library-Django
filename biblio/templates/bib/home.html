@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      crossorigin="anonymous"
+    />
+
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #3F48CC">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbar"
+      >
+      <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar">
+          <a class="navbar-brand mx-auto position-absolute" href={% url 'home' man_id=manager.id %} >Biblio</a>   
+          <div class="navbar-nav mx-auto text-md-center text-left">
+              <a class="nav-item nav-link " id="lend" href={% url 'lend' man_id=manager.id %}>Lending</a>
+              <a class="nav-item nav-link" id="viewlend" href={% url 'view_lends' man_id=manager.id %}>View Lends</a>
+              <a class="nav-item nav-link" id="">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+              <a class="nav-item nav-link" id="sell" href={% url 'sell' man_id=manager.id %}>Selling</a>
+              <a class="nav-item nav-link" id="viewsell" href={% url 'view_sales' man_id=manager.id %}>View Sales</a>
+              <a class="nav-item nav-link" id="">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+              <a class="nav-item nav-link" id="viewsell" href={% url 'register_customer' man_id=manager.id %}>Register Customer</a>
+
+          </div>
+          <div class="nav navbar-nav flex-row justify-content-md-center justify-content-start flex-nowrap">
+            <a class="nav-item nav-link" id="logout" href={% url 'logout' %}>Logout</a>
+          </div>
+     </div>
+    </nav>
+    <script
+    src="/docs/4.4/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm"
+    crossorigin="anonymous"
+  ></script>
+
+{% block content %}
+{% load static %}<link rel="stylesheet" , href="{% static 'css/home.css' %}">
+
+<script>
+
+    function fill(){
+        location.reload()
+    }
+
+    function togglepass() {
+      var x = document.getElementById("password");
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+    }
+     
+    function changeit(){
+        document.getElementById("nom").removeAttribute('readonly');
+        document.getElementById("prenom").removeAttribute('readonly');
+        document.getElementById("password").removeAttribute('readonly');
+        document.getElementById("confirm").removeAttribute('hidden');
+        document.getElementById("cancel").removeAttribute('hidden');
+        document.getElementById("change").hidden=true
+    }
+        
+    
+    
+  </script>
+
+<div style="margin-left: 40px">    <img style="float:right " src="{% static 'img/lib1.png' %}" alt="im1">
+    <br/><br/><br/><br/> <h2 class="welcome">Welcome Back <br/> Manager {{manager.nom}} {{manager.prenom}}!</h2>
+    <br/>
+    <div class="text">
+        Biblio is a tool to help you manage the multiple tasks that you're<br/> responsible for and to simplify said process: Lending / Selling <br/>books
+        , Refunds...  
+    </div> <br/>  <br/><br/><br/>
+    <img style="float:left " src="{% static 'img/lib2.png' %}" alt="im2">
+    <br/><br/><br/>
+    <h2 class="welcome" >Your account Info:</h2><br/>
+    <form method="POST">
+    <table>
+        <tr><td>Family Name :&nbsp&nbsp&nbsp&nbsp</td><td> 
+            <input
+            type="text"
+            value={{manager.nom}}
+            class="form-control"
+            id="nom"
+            name="nom"
+            style="width: 270px;"
+            readonly
+          /></td><td><td/> <td><button type="submit" id="confirm" class="btn btn-primary" style="width: 130px;" hidden>Confirm</button> </td></tr>
+        <tr><td>Name :&nbsp&nbsp&nbsp&nbsp</td><td> 
+            <input
+            type="text"
+            value={{manager.prenom}}
+            class="form-control"
+            id="prenom"
+            name="prenom"
+            style="width: 270px;"
+            readonly
+          /></td><td><td/> <td><button type="button" id="change" class="btn btn-primary" style="width: 130px;" onclick="changeit()">Change</button> </td></tr>
+        <tr><td>Password :&nbsp&nbsp&nbsp&nbsp</td><td> 
+            <input
+          type="password"
+          class="form-control"
+          value={{manager.password}}
+          id="password"
+          name="password"
+          style="width: 270px;"
+          readonly
+        /></td><td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<td/> 
+              <td> <button type="button" id="cancel" class="btn btn-primary" style="width: 130px; "onclick="fill()" hidden>Cancel</button></td></tr>
+        </tr><tr><td><br/></td></tr>
+        <tr><td>&nbsp&nbsp&nbsp<input type="checkbox" id="passshow" name="pass" value="showpass" onclick="togglepass()"><label for="passshow" >&nbsp Show password</label></td><tr/>        
+        
+        <tr><td><br/></td></tr>
+        
+        <tr><td><td/>
+            
+           
+            
+    </form>
+    <br/>
+</div>
+{% endblock %}
+
+
+
+

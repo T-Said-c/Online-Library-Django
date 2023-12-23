@@ -1,0 +1,31 @@
+{% extends 'bib/mainmenu.html' %}
+{% block content %}
+{% load static %}<link rel="stylesheet" , href="{% static 'css/home.css' %}">
+
+<style>
+    ask {
+        font-weight: bold;
+        font-size: 200%;
+      }
+    
+    ans {
+        font-size: 100%;
+      }
+    
+    
+ 
+</style>
+
+
+
+<div id="contentframe" style="position:relative; top: 120px; left: -500px;">
+    <ask>Can I borrow a book through the website?</ask> <br/> <br/>
+    <ans>Currently lending books is only possible by visiting our bookstore, but that could change in the near future. <ans> <br/><br/>
+    
+    <ask>How can I contact support?</ask> <br/> <br/>
+    <ans>If the FAQ page couldn't answer your question, you can check the "contact us" page for information to reach out to us. <ans> <br/><br/>
+    
+    <ask>Can I get a refund on a purchased book?</ask> <br/> <br/>
+    <ans>Refunds are only possible by bringing the book to our shop, please check the "location" page for further information.<ans> <br/><br/>
+</div>
+{% endblock %}

@@ -1,0 +1,91 @@
+{% extends 'bib/home.html' %}
+{% block content %}
+{% load static %}<link rel="stylesheet" , href="{% static 'css/home.css' %}">
+
+<script>
+    function select(rowsel){
+        var row =document.getElementById(rowsel);
+        var ltid = document.getElementById("cheezy").value;
+        if(ltid != "dud"){
+             var lastrow =document.getElementById(ltid);
+             lastrow.style.background = "white";
+            }
+        document.getElementById("cheezy").value = row.id;
+        if(row.style.background == "" || row.style.background =="white") {
+            row.style.background = "grey";
+        }
+        else {
+            row.style.background = "white";
+        }
+    }
+
+    function fineornot(){
+        var id = document.getElementById("cheezy").value + "date"
+        var date =document.getElementById(id).innerHTML;
+        var e = new Date(date)
+        var t = new Date()    
+        if(t>e)
+        {
+            alert("The book wasn't returned on time !");
+        }
+        else
+        {
+            alert("Thank you for returning the book on time !");
+        }   
+    }
+
+    
+</script>
+
+<div style="margin-left: 40px">
+    <form method='POST'>
+      <table class="formtext" ><tr>  
+        <td>Unreturned :</td>
+        <td style="padding:0 0px 0 400px;">Returned :</td><br/><br/>
+        </tr><tr><td style="vertical-align: middle">    
+            <table class="table2" border="2" id="non">
+            <tr>
+              <th>Book</th>
+              <th>Member</th>
+              <th>Lend Date</th>
+              <th>Return Date</th>
+              </tr>
+              {% for emp in empreintesfalse %}<tr class="clickable "
+              onclick="select(this.id,this.index)" id="{{emp.id}}">
+                <td>{{emp.liv_id}}</td>
+                <td>{{emp.ad_id}}</td>
+                <td>{{emp.begin}}</td>
+                <td id="{{emp.id}}date">{{emp.end}}</td>
+            </tr>
+              
+          {% endfor %}            
+          </table>
+      </td ><td style="padding:0px 0px 195px 400px;"><table class="table2" border="2">
+        <tr>
+          <th>Book</th>
+          <th>Member</th>
+          <th>Lend Date</th>
+          <th>Returned Date</th>
+        </tr>           
+        {% for emp in empreintestrue %}<tr>
+            <td>{{emp.liv_id}}</td>
+            <td>{{emp.ad_id}}</td>
+            <td>{{emp.begin}}</td>
+            <td>{{emp.end}}</td></tr>
+          
+      {% endfor %}            
+      </table>
+  </td>
+
+
+</table>
+    
+
+</table><br/><br/><br/><br/><br/><br/><input type="text" id="cheezy" name="cheezy" value="dud" hidden/>
+    <div align="center"><button type="submit" onclick="fineornot()" class="btn btn-primary" style="width: 150px;">Confirm Return</button></div>
+</div>
+
+</form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'bib/home.html' %}
+{% block content %}
+{% load static %}<link rel="stylesheet" , href="{% static 'css/home.css' %}">
+
+<script>
+     function filltable(){
+        var liv =document.getElementById("livs").value    
+        var [id, nom, categorie, auteur, prix, qt ] = liv.split('+')
+        document.getElementById("nom").innerHTML=nom        
+        document.getElementById("categorie").innerHTML=categorie        
+        document.getElementById("auteur").innerHTML=auteur        
+        document.getElementById("prix").innerHTML=prix        
+        document.getElementById("qt").innerHTML=qt
+     }
+</script>
+
+<div style="margin-left: 40px"><br/><br/><br/>
+<form method='POST'>
+  <table class="formtext" ><tr>
+    <td>Member : </td><td style="padding:0 15px 0 40px;"><select name="mems" id="mems">
+        <option value="" disabled selected>Select the Member</option>
+        {% for adherent in adherents %}
+          <option value={{adherent.id}}>{{adherent.nom}} {{adherent.prenom}}</option>
+        {% endfor %}
+      </select></td>
+    <td style="padding:0 15px 0 400px;">Book : &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<select onchange="filltable()" name="livs" id="livs">
+        <option value="" disabled selected>Select the Book</option>
+        {% for livre in livres %}
+          <option value="{{livre.id}}+{{livre.nom}}+{{livre.categorie}}+{{livre.auteur}}+{{livre.prix}}+{{livre.qt}}">{{livre.nom}}</option>
+        {% endfor %}
+      </select></td>
+   
+    </tr><tr>
+    <td><br/><br/><br/>Return date :</td><td style="padding:0 15px 0 40px;"><br/><br/><br/>
+        <input type="date" id="dt" name="dt"
+        min="2023-06-19"></td>
+    <td style="padding:0 15px 0 200px;"><br/><br/><br/><table class="table2" border="2">
+            <tr>
+              <th>Name</th>
+              <th>Category</th>
+              <th>Author</th>
+              <th>Price</th>
+              <th>Quantity</th>
+            </tr>           
+            <tr>
+                <td><label id="nom">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label></td>
+                <td><label id="categorie">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label></td>
+                <td><label id="auteur">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label></td>
+                <td><label id="prix">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label></td>
+                <td><label id="qt">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label></td>
+              </tr>            
+          </table>
+      </td>
+    
+
+</table><br/><br/><br/><br/><br/><br/>
+    <div align="center"><button type="submit" class="btn btn-primary" style="width: 130px;">Register lend</button> </div>
+</div>
+
+</form>
+</div>
+{% endblock %}

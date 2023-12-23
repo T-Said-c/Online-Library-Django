@@ -1,0 +1,90 @@
+{% extends 'bib/home.html' %}
+{% block content %}
+{% load static %}<link rel="stylesheet" , href="{% static 'css/home.css' %}">
+
+<script>
+    function togglepass() {
+      var x = document.getElementById("password");
+      var y = document.getElementById("passcon");
+      if (x.type === "password") {
+        x.type = "text";
+        y.type = "text";
+      } else {
+        x.type = "password";
+        y.type = "password";
+      }
+
+    }
+  </script>
+  
+  <body>
+
+    <form method="POST">
+      <br/> 
+  <br/> <br/><div class="form-group" align="center">
+    <label for="email">Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="name"
+      name="name"
+      placeholder="Enter name"
+      style="width: 270px;"
+    />
+  </div>
+  <div class="form-group" align="center">
+    <label for="email">Family Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="fam"
+      name="fam"
+      placeholder="Enter family name"
+      style="width: 270px;"
+    />
+  </div>
+  <div class="form-group" align="center">
+    <label for="email">Email Address</label>
+    <input
+      type="email"
+      class="form-control"
+      id="email"
+      name="email"
+      placeholder="Enter email"
+      style="width: 270px;"
+    />
+  </div>
+  <div class="form-group" align="center">
+    <label for="password">Password</label>
+    <input
+      type="password"
+      class="form-control"
+      id="password"
+      name="password"
+      placeholder="Enter password"
+      style="width: 270px;"
+    /></div>
+    <div class="form-group" align="center">
+        <label for="password">Confirm Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="passcon"
+          name="passcon"
+          placeholder="Re-enter password"
+          style="width: 270px;"
+        />  <br/>
+    <input type="checkbox" id="passshow" name="pass" value="showpass" onclick="togglepass()"><label for="passshow" >&nbsp Show password</label></div>
+
+  </div>
+  {% if messages %}
+    {% for message in messages%}
+      <div align="center"><label style="color:red;" id="lb" name="lb">{{message}}</label></div>
+    {% endfor %}
+  {% endif %}
+  <div align="center"><button type="submit" class="btn btn-primary" style="width: 130px;">Register</button> </div>
+</form>
+  </body>
+</html>
+
+{% endblock %}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      crossorigin="anonymous"
+    />
+    
+
+  </head>
+  <body >
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #3F48CC">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbar"
+      >
+      <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar">
+          <a class="navbar-brand mx-auto position-absolute" href={% url 'clthome' clt_id=client.id %} >Biblio</a>   
+          <div class="navbar-nav mx-auto text-md-center text-left">
+              <a class="nav-item nav-link " id="shop" href={% url 'shop' clt_id=client.id %} >Buy a book</a>
+
+          </div>
+          <div class="nav navbar-nav flex-row justify-content-md-center justify-content-start flex-nowrap">
+            <a class="nav-item nav-link" id="cart"  href={% url 'cart' clt_id=client.id %} >Cart</a>
+            <a class="nav-item nav-link" id="">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+            <a class="nav-item nav-link" id="logout" href={% url 'logout' %}>Logout</a>
+          </div>
+     </div>
+    </nav>
+    <script
+    src="/docs/4.4/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm"
+    crossorigin="anonymous"
+  ></script>
+
+{% block content %}
+{% load static %}<link rel="stylesheet" , href="{% static 'css/home.css' %}">
+
+<script>
+   function cartadd(id,prix){
+    document.getElementById("idliv").value = id;
+    document.getElementById("qtsale").value = document.getElementById(id).value;
+    var qt = document.getElementById("qtsale").value
+    document.getElementById("montant").value = prix * qt;
+    alert("Your order has been added to the cart successfully!")
+    document.getElementById("shopform").submit();
+  }
+</script>
+
+  <div style="margin-left: 40px"><br/>
+    <form method='POST' id="shopform">
+        <center><table class="table2" border="2" id="tab" width="100%">
+          <tr>
+            <th>Cover:</th>
+            <th>Name:</th>
+            <th>Synopsis:</th>
+            <th>Price:</th>
+            <th>Quantity:</th>
+            </tr>
+          {% for liv in livres %}
+            <tr>
+                <td><img src="{{ liv.pic.url}} " width="100" height="150" alt=""></td>
+                <td>{{liv.nom}}</td>
+                <td>{{liv.synopsis}}</td>
+                <td>&nbsp&nbsp&nbsp&nbsp{{liv.prix}}&nbsp&nbsp&nbsp&nbsp</td>
+                <td>&nbsp&nbsp&nbsp&nbsp<input type="number" id="{{liv.id}}" name="qtin" id="{{liv.id}}" value="1" min="1" max={{liv.qt}}></td>
+                <td><button type="button" class="btn btn-primary" style="width: 150px;" value="{{liv.prix}}" onclick="cartadd({{liv.id}},{{liv.prix}})">Add to Cart</button></td>
+            </tr>
+              
+          {% endfor %}            
+          </table></center>
+          <input type="text" id="idliv" name="idliv" value="dud" hidden/>
+          <input type="text" id="montant" name="montant" value="bruh" hidden />
+          <input type="text" id="qtsale" name="qtsale" value="nuhuh" hidden/>
+</from>
+
+
+{% endblock %}
